@@ -34,19 +34,22 @@ public class PlayerDao {
     }
 
     public List<Player> getPlayers() throws Exception {
-        String query = "SELECT id, name from " + Constants.Tables.tableCountries;
+        String query = "SELECT name, country_id from " + Constants.Tables.tablePlayers;
         Connection connection = DatabaseUtils.getConnection();
         if (connection == null) {
             throw new Exception("Database connection is null.");
         }
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
-        List<Player> countries = new ArrayList<Player>();
+        List<Player> players = new ArrayList<Player>();
         while (resultSet.next()) {
             Player player = new Player();
             player.setName(resultSet.getString("name"));
-            countries.add(player);
+            player.setCountry(Utils.getCountryNameById(resultSet.getInt("country_id")));
+            players.add(player);
         }
-        return countries;
+        statement.close();
+        connection.close();
+        return players;
     }
 }

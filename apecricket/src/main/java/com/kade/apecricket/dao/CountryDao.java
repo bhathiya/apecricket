@@ -24,6 +24,8 @@ public class CountryDao {
         for (Country country : countries) {
             statement.setString(1, country.getName());
         }
+        statement.close();
+        connection.close();
     }
 
     public List<Country> getCountries() throws Exception {
@@ -41,6 +43,8 @@ public class CountryDao {
             country.setName(resultSet.getString("name"));
             countries.add(country);
         }
+        statement.close();
+        connection.close();
         return countries;
     }
 }

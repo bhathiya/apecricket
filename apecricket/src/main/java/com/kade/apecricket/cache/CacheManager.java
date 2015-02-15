@@ -10,9 +10,9 @@ import java.util.Map;
 public class CacheManager {
 
     private static CountryDao countryDao = new CountryDao();
-    private static Map<String, Integer> countryMap = null;
+    private static Map<Integer, String> countryMap = null;
 
-    public static Map<String, Integer> getCachedCountryMap() throws Exception {
+    public static Map<Integer, String> getCachedCountryMap() throws Exception {
         if (countryMap == null) {
             loadCountryMap();
         }
@@ -20,10 +20,10 @@ public class CacheManager {
     }
 
     private static synchronized void loadCountryMap() throws Exception {
-        Map<String, Integer> countryMap = new HashMap<String, Integer>();
+        Map<Integer, String> countryMap = new HashMap<Integer, String>();
         List<Country> countryList = countryDao.getCountries();
         for (Country country : countryList) {
-            countryMap.put(country.getName(), country.getId());
+            countryMap.put(country.getId(), country.getName());
         }
         CacheManager.countryMap = countryMap;
     }
