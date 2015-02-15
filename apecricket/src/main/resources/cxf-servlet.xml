@@ -7,6 +7,8 @@
     <jaxrs:server id="bidderServices" address="/bidder">
         <jaxrs:serviceBeans>
             <ref bean="bidderServiceBean"/>
+            <ref bean="countryServiceBean"/>
+            <ref bean="playerServiceBean"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jacksonJsonProvider"/>
@@ -14,5 +16,7 @@
     </jaxrs:server>
 
     <bean id="bidderServiceBean" class="com.kade.apecricket.resource.BidResource"/>
+    <bean id="countryServiceBean" class="com.kade.apecricket.resource.CountryResource"/>
+    <bean id="playerServiceBean" class="com.kade.apecricket.resource.PlayerResource"/>
     <bean id="jacksonJsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
 </beans>

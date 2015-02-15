@@ -1,6 +1,7 @@
 package com.kade.apecricket.dao;
 
 import com.kade.apecricket.bean.Country;
+import com.kade.apecricket.cache.CacheManager;
 import com.kade.apecricket.util.Constants;
 import com.kade.apecricket.util.DatabaseUtils;
 
@@ -23,7 +24,10 @@ public class CountryDao {
         PreparedStatement statement = connection.prepareStatement(query);
         for (Country country : countries) {
             statement.setString(1, country.getName());
+            statement.addBatch();
         }
+        statement.executeBatch();
+        CacheManager.clearCountryMap();
         statement.close();
         connection.close();
     }

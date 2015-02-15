@@ -1,6 +1,5 @@
 package com.kade.apecricket.dao;
 
-import com.kade.apecricket.bean.Country;
 import com.kade.apecricket.bean.Player;
 import com.kade.apecricket.util.Constants;
 import com.kade.apecricket.util.DatabaseUtils;
@@ -26,7 +25,7 @@ public class PlayerDao {
         for (Player player : players) {
             statement.setString(1, player.getName());
             statement.setInt(2, Utils.getCountryId(player.getCountry()));
-            statement.addBatch(query);
+            statement.addBatch();
         }
         statement.executeBatch();
         statement.close();
