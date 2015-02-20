@@ -2,6 +2,7 @@ package com.kade.apecricket.util;
 
 import com.kade.apecricket.cache.CacheManager;
 
+import java.security.MessageDigest;
 import java.util.Map;
 
 public class Utils {
@@ -18,6 +19,14 @@ public class Utils {
 
     public static String getCountryNameById(int countryId) throws Exception {
         return CacheManager.getCachedCountryMap().get(countryId);
+    }
+
+    public static String encrypt(String x) throws Exception {
+        MessageDigest md;
+        md = java.security.MessageDigest.getInstance("SHA-1");
+        md.reset();
+        md.update(x.getBytes());
+        return new String(md.digest());
     }
 
 }
